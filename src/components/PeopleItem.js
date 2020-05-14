@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image} from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { getTheme } from 'react-native-material-kit'
@@ -34,14 +34,18 @@ const styles = StyleSheet.create({
 
 const PeopleItem = (props) => {
     return (
-    <View style={[theme.cardStyle, styles.card]}>
-        <Image 
-            source={require('../images/background.jpg')}
-            style={[theme.cardImageStyle, styles.image]}/>
-        <Icon />
-        <Text style={[theme.cardTitleStyle, styles.title]}>{props.people.firstName} {props.people.lastName}</Text>
-        <Text style={[theme.cardActionStyle, styles.action]}>{props.people.company}</Text>
-    </View>)
+    <TouchableWithoutFeedback 
+        onPress={() => props.selectedPerson(props.people)}>
+        <View style={[theme.cardStyle, styles.card]}>
+            <Image 
+                source={require('../images/background.jpg')}
+                style={[theme.cardImageStyle, styles.image]}/>
+            <Icon />
+            <Text style={[theme.cardTitleStyle, styles.title]}>{props.people.firstName} {props.people.lastName}</Text>
+            <Text style={[theme.cardActionStyle, styles.action]}>{props.people.company}</Text>
+        </View>
+    </TouchableWithoutFeedback>
+    )
 }
 
 const mapStateToProps = state => {

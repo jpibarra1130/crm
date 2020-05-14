@@ -3,22 +3,25 @@ import people from './people.json';
 const initialState = {
     people,
     detailView: false,
-    personSelected: null,
+    selectedPerson: null,
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case 'SELECTED_PERSON':
+            console.log("action: ", action);
             return {
                 ...state,
                 detailView: true,
-                personSelected: action.payload,
+                selectedPerson: action.selectId,
             }
         case 'NONE_SELECTED':
+            console.log("None selected");
+            
             return {
                 ...state,
                 detailView: false,
-                personSelected: null,
+                selectedPerson: null,
             }
         default:
             return state;
