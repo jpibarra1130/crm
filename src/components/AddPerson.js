@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput, Button } from 'react-native';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+import { createNewContact } from '../thunks';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const styles = StyleSheet.create({
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const AddPerson = ({createNewContact, navigation})  => {
+const AddPerson = ({addPerson, navigation})  => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phone, setPhone] = useState('');
@@ -74,7 +74,7 @@ const AddPerson = ({createNewContact, navigation})  => {
                     color="blue"
                     accessibilityLabel="Learn more about this purple button"
                     onPress={() => {
-                        createNewContact(firstName, lastName, phone, email, company, project, notes);
+                        addPerson(firstName, lastName, phone, email, company, project, notes);
                         navigation.navigate('People');
                     }}/>
             </View>
@@ -82,5 +82,8 @@ const AddPerson = ({createNewContact, navigation})  => {
     )
 }
 
+const mapDispatchToProps = dispatch => ({
+    addPerson: (firstName, lastName, phone, email, company, project, notes) => dispatch(createNewContact(firstName, lastName, phone, email, company, project, notes)),
+});
 
-export default connect(null, actions)(AddPerson);
+export default connect(null, mapDispatchToProps)(AddPerson);
