@@ -1,13 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, Text, Image, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
-import { getTheme } from 'react-native-material-kit'
 import EvilIcon from 'react-native-vector-icons/EvilIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons';
 import * as actions from '../actions';
-
-const theme = getTheme();
 
 const styles = StyleSheet.create({
     card: {
@@ -72,7 +69,7 @@ const PeopleDetail = ({ selectedPerson, noneSelected}) => {
         <ScrollView showsVerticalScrollIndicator={false}>
             <Image 
                 source={require('../images/background.jpg')}
-                style={[theme.cardImageStyle, styles.image]}
+                style={styles.image}
             />
             <EvilIcon 
                 name={'user'}
@@ -86,8 +83,8 @@ const PeopleDetail = ({ selectedPerson, noneSelected}) => {
                 style={styles.closeIcon}
                 onPress={() => noneSelected()}
             />
-            <Text style={[theme.cardTitleStyle, styles.title1]}>{selectedPerson.firstName} {selectedPerson.lastName}</Text>
-            <Text style={[theme.cardTitleStyle, styles.title2]}>from {selectedPerson.company}</Text>
+            <Text style={[styles.title1]}>{selectedPerson.firstName} {selectedPerson.lastName}</Text>
+            <Text style={[styles.title2]}>from {selectedPerson.company}</Text>
             <View style={styles.textArea}>
                 <MaterialIcon 
                     name={'phone'}
@@ -95,7 +92,7 @@ const PeopleDetail = ({ selectedPerson, noneSelected}) => {
                     style={styles.textIcons}
                     onPress={() => noneSelected()}
                 />
-                <Text style={theme.cardContentStyle}>{selectedPerson.phone}</Text>
+                <Text >{selectedPerson.phone}</Text>
             </View>
             <View style={styles.textArea}>
                 <MaterialIcon 
@@ -104,7 +101,7 @@ const PeopleDetail = ({ selectedPerson, noneSelected}) => {
                     style={styles.textIcons}
                     onPress={() => noneSelected()}
                 />
-                <Text style={theme.cardContentStyle}>{selectedPerson.email}</Text>
+                <Text>{selectedPerson.email}</Text>
             </View>
             <View style={styles.textArea}>
                 <MaterialIcon 
@@ -113,7 +110,7 @@ const PeopleDetail = ({ selectedPerson, noneSelected}) => {
                     style={styles.textIcons}
                     onPress={() => noneSelected()}
                 />
-                <Text style={theme.cardContentStyle}>{selectedPerson.project}</Text>
+                <Text>{selectedPerson.project}</Text>
             </View>
             <View style={styles.textArea}>
                 <MaterialIcon 
@@ -122,7 +119,7 @@ const PeopleDetail = ({ selectedPerson, noneSelected}) => {
                     style={styles.textIcons}
                     onPress={() => noneSelected()}
                 />
-                <Text style={theme.cardContentStyle}>{selectedPerson.notes}</Text>
+                <Text>{selectedPerson.notes}</Text>
             </View>
             <View>
                 <TouchableOpacity>

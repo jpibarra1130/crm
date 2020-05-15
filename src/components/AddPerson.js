@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput, Button } from 'react-native';
 import { connect } from 'react-redux';
-import { MKColor } from 'react-native-material-kit'
 import * as actions from '../actions';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -13,10 +12,6 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 20,
         justifyContent: 'space-between',
-    },
-    fieldStyles: {
-        height: 40,
-        color: MKColor.Orange,
     },
     addButton: {
         marginTop: 20,
