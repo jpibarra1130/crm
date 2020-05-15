@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, FlatList} from 'react-native';
+import { View, SafeAreaView, StyleSheet, FlatList} from 'react-native';
 import { connect } from 'react-redux';
 import PeopleItem from './PeopleItem';
 import PeopleDetail from './PeopleDetail';
@@ -13,8 +13,6 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
     }
 });
-
-
 
 class PeopleList extends Component {
     renderInitialView(){
@@ -33,7 +31,9 @@ class PeopleList extends Component {
     render() {
         return (
             <View styles={styles.container}>
+                <SafeAreaView>
                 {this.renderInitialView()}
+                </SafeAreaView>
             </View>
         )
     }

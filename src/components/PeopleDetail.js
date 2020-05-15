@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, Text, Image, TouchableOpacity} from 'react-native';
+import { View, StyleSheet, ScrollView, Image, TouchableOpacity} from 'react-native';
+import {  Text, Body, Grid, Row } from 'native-base'
 import { connect } from 'react-redux';
 import EvilIcon from 'react-native-vector-icons/EvilIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -14,14 +15,15 @@ const styles = StyleSheet.create({
       borderColor: 'lightgrey',
       borderWidth: 0.5,
     },
+    title: {
+        flexDirection: 'column',        
+    },
     title1: {
-        top: 10,
-        left: 80,
         fontSize: 24,
+        alignSelf: 'flex-end',
     },
     title2: {
-        top: 35,
-        left: 82,
+        alignSelf: 'flex-end',
         fontSize: 18,
     },
     image: {
@@ -48,12 +50,12 @@ const styles = StyleSheet.create({
     },
     textArea: {
         flexDirection: 'row',
-        paddingLeft: 20,
-        paddingTop: 10,
         width: 260,
+        paddingTop: 10,
     },
     textIcons: {
         color: '#26a69a',
+        paddingRight: 20,
     },
     actionArea: {
         paddingTop: 10,
@@ -67,6 +69,7 @@ const PeopleDetail = ({ selectedPerson, noneSelected}) => {
     return (
     <View styles={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
+            <Body>
             <Image 
                 source={require('../images/background.jpg')}
                 style={styles.image}
@@ -83,69 +86,79 @@ const PeopleDetail = ({ selectedPerson, noneSelected}) => {
                 style={styles.closeIcon}
                 onPress={() => noneSelected()}
             />
-            <Text style={[styles.title1]}>{selectedPerson.firstName} {selectedPerson.lastName}</Text>
-            <Text style={[styles.title2]}>from {selectedPerson.company}</Text>
-            <View style={styles.textArea}>
-                <MaterialIcon 
-                    name={'phone'}
-                    size={40}
-                    style={styles.textIcons}
-                    onPress={() => noneSelected()}
-                />
-                <Text >{selectedPerson.phone}</Text>
-            </View>
-            <View style={styles.textArea}>
-                <MaterialIcon 
-                    name={'email'}
-                    size={40}
-                    style={styles.textIcons}
-                    onPress={() => noneSelected()}
-                />
-                <Text>{selectedPerson.email}</Text>
-            </View>
-            <View style={styles.textArea}>
-                <MaterialIcon 
-                    name={'assignment'}
-                    size={40}
-                    style={styles.textIcons}
-                    onPress={() => noneSelected()}
-                />
-                <Text>{selectedPerson.project}</Text>
-            </View>
-            <View style={styles.textArea}>
-                <MaterialIcon 
-                    name={'mode-edit'}
-                    size={40}
-                    style={styles.textIcons}
-                    onPress={() => noneSelected()}
-                />
-                <Text>{selectedPerson.notes}</Text>
-            </View>
-            <View>
-                <TouchableOpacity>
-                    <Image 
-                        source={require('../images/call@2x.png.png')}
-                        style={styles.actionImage}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Image 
-                        source={require('../images/email@2x.png.png')}
-                        style={styles.actionImage}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Image 
-                        source={require('../images/sms@2x.png.png')}
-                        style={styles.actionImage}
-                    />
-                </TouchableOpacity>
+                
+            <Grid>
+                <Row style={styles.title}>
+                    <Text style={styles.title1}>{selectedPerson.firstName} {selectedPerson.lastName}</Text>
+                    <Text style={styles.title2}>from {selectedPerson.company}</Text>
+                </Row>
+                <Row>
+                    <View style={styles.textArea}>
+                        <MaterialIcon 
+                            name={'phone'}
+                            size={40}
+                            style={styles.textIcons}
+                            onPress={() => noneSelected()}
+                        />
+                        <Text >{selectedPerson.phone}</Text>
+                    </View>
+                </Row>
+                <Row>
+                    <View style={styles.textArea}>
+                        <MaterialIcon 
+                            name={'email'}
+                            size={40}
+                            style={styles.textIcons}
+                            onPress={() => noneSelected()}
+                        />
+                        <Text>{selectedPerson.email}</Text>
+                    </View>
+                </Row>
                 <View style={styles.textArea}>
-                    <Text>Call</Text>
-                    <Text>Email</Text>
-                    <Text>SMS</Text>
+                    <MaterialIcon 
+                        name={'assignment'}
+                        size={40}
+                        style={styles.textIcons}
+                        onPress={() => noneSelected()}
+                    />
+                    <Text>{selectedPerson.project}</Text>
                 </View>
-            </View>
+                <View style={styles.textArea}>
+                    <MaterialIcon 
+                        name={'mode-edit'}
+                        size={40}
+                        style={styles.textIcons}
+                        onPress={() => noneSelected()}
+                    />
+                    <Text>{selectedPerson.notes}</Text>
+                </View>
+                <View>
+                    <TouchableOpacity>
+                        <Image 
+                            source={require('../images/call@2x.png.png')}
+                            style={styles.actionImage}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Image 
+                            source={require('../images/email@2x.png.png')}
+                            style={styles.actionImage}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Image 
+                            source={require('../images/sms@2x.png.png')}
+                            style={styles.actionImage}
+                        />
+                    </TouchableOpacity>
+                    <View style={styles.textArea}>
+                        <Text>Call</Text>
+                        <Text>Email</Text>
+                        <Text>SMS</Text>
+                    </View>                
+                </View>
+                </Grid>
+            </Body>
         </ScrollView>
     </View>)
 }

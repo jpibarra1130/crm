@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
+import { ImageBackground, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
+import { CardItem, Text, Body } from 'native-base';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import * as actions from '../actions';
@@ -14,6 +15,9 @@ const styles = StyleSheet.create({
         fontSize: 24,
     },
     image: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center",
         height: 100,
     },
     action: {
@@ -33,14 +37,17 @@ const PeopleItem = (props) => {
     return (
     <TouchableWithoutFeedback 
         onPress={() => props.selectedPerson(props.people)}>
-        <View style={styles.card}>
-            <Image 
+        <CardItem>
+            <ImageBackground 
                 source={require('../images/background.jpg')}
-                style={styles.image}/>
-            <Icon />
-            <Text style={styles.title}>{props.people.firstName} {props.people.lastName}</Text>
+                style={styles.image}>
+            <Body>
+                <Icon />            
+                <Text style={styles.title}>{props.people.firstName} {props.people.lastName}</Text>
+            </Body>
             <Text style={styles.action}>{props.people.company}</Text>
-        </View>
+            </ImageBackground>
+        </CardItem>
     </TouchableWithoutFeedback>
     )
 }
