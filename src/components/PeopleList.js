@@ -1,6 +1,9 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { View, SafeAreaView, StyleSheet, FlatList} from 'react-native';
 import { connect } from 'react-redux';
+
+import { loadInitialContacts } from '../thunks';
+
 import PeopleItem from './PeopleItem';
 import PeopleDetail from './PeopleDetail';
 
@@ -14,30 +17,33 @@ const styles = StyleSheet.create({
     }
 });
 
-class PeopleList extends Component {
-    renderInitialView(){
-        if (this.props.detailView === true) {
+const PeopleList = ({ detailView, people, loadInitialPeople }) => {
+    useEffect(() => {
+        loadInitialPeople();
+    }, []);
+    
+    const renderInitialView = () => {
+        if (detailView === true) {
             return (<PeopleDetail />)
         } else {
             return (
                 <FlatList 
-                    data={this.props.people}
-                    keyExtractor={(item) => item.id.toString()}
+                    data={people}
+                    keyExtractor={(item) => item._id}
                     renderItem={({item}) => <PeopleItem people={item}/>}
                 />
             )
         }
     }
-    render() {
-        return (
-            <View styles={styles.container}>
-                <SafeAreaView>
-                {this.renderInitialView()}
-                </SafeAreaView>
-            </View>
-        )
-    }
-}
+
+    return (
+        <View styles={styles.container}>
+            <SafeAreaView>
+                {renderInitialView()}
+            </SafeAreaView>
+        </View>
+    )
+};
 
 const mapStateToProps = state => {
     return { 
@@ -46,4 +52,8 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps)(PeopleList);
+const mapDispatchToProps = dispatch => ({
+    loadInitialPeople: () => dispatch(loadInitialContacts()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PeopleList);

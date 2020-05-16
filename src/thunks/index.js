@@ -1,3 +1,8 @@
+import { loadInitialPeopleSuccess, newContactSuccess } from '../actions';
+import config from "../config";
+
+const API_HOST = `${config['API_HOST']}:${config['API_PORT']}`
+
 export const createNewContact = (firstName, lastName, phone, email, 
     company, project, notes) =>  async dispatch => {
     try {
@@ -24,6 +29,27 @@ export const createNewContact = (firstName, lastName, phone, email,
         dispatch({ type: 'NEW_CONTACT' });
     } catch (error) {
 
+        dispatch(displayAlert(error));
+    }
+};
+
+export const loadInitialContacts = () =>  async dispatch => {
+    try {
+        const url = `${API_HOST}/contact`;
+        console.log('URL: ', url);
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+        });
+
+        const data = await response.json();
+        console.log('Success: ', data);
+        
+        dispatch(loadInitialPeopleSuccess(data));
+    } catch (error) {
         dispatch(displayAlert(error));
     }
 };

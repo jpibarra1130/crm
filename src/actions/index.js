@@ -11,6 +11,12 @@ export const noneSelected = () => {
     };
 };
 
+export const loadInitialPeopleSuccess = people => {
+    return {
+        type: 'INITIAL_FETCH',
+        payload: { people },
+    }
+};
 
 export const formUpdate = ({ prop, value }) => {
     return {
