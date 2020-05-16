@@ -1,7 +1,7 @@
 import { Platform } from 'react-native'
 
 const OS_API_HOST = {
-    ios: 'https://localhost',
+    ios: 'http://127.0.0.1',
     android: 'http:10.0.2.2',
 }
 
