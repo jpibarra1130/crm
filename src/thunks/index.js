@@ -6,7 +6,7 @@ const API_HOST = `${config['API_HOST']}:${config['API_PORT']}`
 export const createNewContact = (firstName, lastName, phone, email, 
     company, project, notes) =>  async dispatch => {
     try {
-        const response = await fetch('http://192.168.72.244:3000/contact', {
+        const response = await fetch(`${API_HOST}/contact`, {
             method: 'POST',
             body: JSON.stringify({
                 "firstName": firstName, 
@@ -23,10 +23,10 @@ export const createNewContact = (firstName, lastName, phone, email,
             }
         });
 
-        const responseJson = await response.json();
-        console.log('Sucess: ', responseJson);
+        const newContact = await response.json();
+        console.log('Success: ', newContact);
         
-        dispatch({ type: 'NEW_CONTACT' });
+        dispatch(newContactSuccess(newContact));
     } catch (error) {
 
         dispatch(displayAlert(error));

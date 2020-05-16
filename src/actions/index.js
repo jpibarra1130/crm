@@ -3,7 +3,7 @@ export const selectedPerson = (peopleId) => {
         type: 'SELECTED_PERSON',
         selectId: peopleId,
     };
-}
+};
 
 export const noneSelected = () => {
     return {
@@ -15,6 +15,13 @@ export const loadInitialPeopleSuccess = people => {
     return {
         type: 'INITIAL_FETCH',
         payload: { people },
+    }
+};
+
+export const newContactSuccess = contact => {
+    return {
+        type: 'NEW_CONTACT',
+        payload: { contact },
     }
 };
 

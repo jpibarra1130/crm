@@ -29,9 +29,11 @@ export default (state = initialState, action) => {
                 ...state,
                 [action.payload.prop]: action.payload.value,
             }
-
         case 'NEW_CONTACT':
-            return initialState;
+            return {
+                ...state,
+                people: [...state.people, action.payload.contact]
+            };
 
         case 'ADD_PERSON':
             return {
