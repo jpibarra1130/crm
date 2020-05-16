@@ -3,7 +3,7 @@ import { ImageBackground, StyleSheet, Image, TouchableWithoutFeedback } from 're
 import { CardItem, Text, Body } from 'native-base';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/EvilIcons';
-import * as actions from '../actions';
+import { selectedPerson } from '../actions';
 
 const styles = StyleSheet.create({
     card: {
@@ -33,27 +33,27 @@ const styles = StyleSheet.create({
     },
 });
 
-const PeopleItem = (props) => {
+const PeopleItem = ({selectedPerson, people,}) => {
     return (
     <TouchableWithoutFeedback 
-        onPress={() => props.selectedPerson(props.people)}>
+        onPress={() => selectedPerson(people)}>
         <CardItem>
             <ImageBackground 
                 source={require('../images/background.jpg')}
                 style={styles.image}>
             <Body>
                 <Icon />            
-                <Text style={styles.title}>{props.people.firstName} {props.people.lastName}</Text>
+                <Text style={styles.title}>{people.firstName} {people.lastName}</Text>
             </Body>
-            <Text style={styles.action}>{props.people.company}</Text>
+            <Text style={styles.action}>{people.company}</Text>
             </ImageBackground>
         </CardItem>
     </TouchableWithoutFeedback>
     )
 }
 
-const mapStateToProps = state => {
-    return { people: state.people }
-};
+const mapDispatchToProps = dispatch => ({
+    selectedPerson: (people) => dispatch(selectedPerson(people)),
+});
 
-export default connect(null, actions)(PeopleItem);
+export default connect(null, mapDispatchToProps)(PeopleItem);
